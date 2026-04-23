@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookshelf App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #667eea, #764ba2);
+        --card-bg: white;
+        --text-color: #333;
+        --input-bg: white;
+        --input-border: #ddd;
+        --book-bg: #f9fafb;
+      }
+      [data-theme="dark"] {
+        --bg-gradient: linear-gradient(135deg, #1a1a2e, #16213e);
+        --card-bg: #0f3460;
+        --text-color: #e2e2e2;
+        --input-bg: #16213e;
+        --input-border: #533483;
+        --book-bg: #1a1a2e;
+      }
+      * {
+        box-sizing: border-box;
+        transition: 0.3s;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-color);
+        min-height: 100vh;
+      }
+      .settings-bar {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 15px;
+        max-width: 1100px;
+        margin: auto;
+      }
+      .btn-tool {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 5px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      header h1 {
+        text-align: center;
+        color: white;
+        margin: 10px 0 20px 0;
+      }
+      main {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+      }
+      section {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        border-bottom: 2px solid #667eea;
+        display: inline-block;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+      input {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border);
+        width: 100%;
+        background: var(--input-bg);
+        color: var(--text-color);
+      }
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        width: fit-content;
+      }
+      .checkbox-wrapper input {
+        width: auto;
+      }
+      button[type="submit"] {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        width: 100%;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .grid-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+      .book-item {
+        background: var(--book-bg);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 5px solid #667eea;
+      }
+      .book-item h3 {
+        margin: 0 0 5px 0;
+      }
+      .book-item p {
+        margin: 2px 0;
+        font-size: 14px;
+        opacity: 0.8;
+      }
+      .actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .actions button {
+        padding: 6px 12px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        color: white;
+      }
+      .btn-complete {
+        background: #38a169;
+      }
+      .btn-delete {
+        background: #e53e3e;
+      }
+      .btn-edit {
+        background: #d69e2e;
+      }
+      @media (max-width: 768px) {
+        .grid-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <div class="settings-bar">
+      <button class="btn-tool" onclick="toggleLanguage()" id="langBtn">
+        EN
+      </button>
+      <button class="btn-tool" onclick="toggleTheme()" id="themeBtn">
+        🌙 Dark
+      </button>
+    </div>
+
+    <header>
+      <h1 id="mainTitle">Bookshelf App</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2 id="formHeader">Tambah Buku Baru</h2>
+        <form id="bookForm" data-testid="bookForm">
+          <div class="form-group">
+            <label for="bookFormTitle" id="labelTitle">Judul</label>
+            <input
+              id="bookFormTitle"
+              type="text"
+              required
+              data-testid="bookFormTitleInput"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookFormAuthor" id="labelAuthor">Penulis</label>
+            <input
+              id="bookFormAuthor"
+              type="text"
+              required
+              data-testid="bookFormAuthorInput"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookFormYear" id="labelYear">Tahun</label>
+            <input
+              id="bookFormYear"
+              type="number"
+              required
+              data-testid="bookFormYearInput"
+            />
+          </div>
+          <div class="form-group">
+            <label class="checkbox-wrapper">
+              <input
+                id="bookFormIsComplete"
+                type="checkbox"
+                data-testid="bookFormIsCompleteCheckbox"
+              />
+              <span id="labelComplete">Selesai dibaca</span>
+            </label>
+          </div>
+          <button
+            id="bookFormSubmit"
+            type="submit"
+            data-testid="bookFormSubmitButton"
+          >
+            <span id="submitText">Masukkan Buku ke rak</span>
+            <span id="targetRack">Belum selesai dibaca</span>
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2 id="searchHeader">Cari Buku</h2>
+        <form id="searchBook" data-testid="searchBookForm">
+          <label for="searchBookTitle" id="labelSearch">Judul</label>
+          <input
+            id="searchBookTitle"
+            type="text"
+            data-testid="searchBookFormTitleInput"
+          />
+          <button
+            id="searchSubmit"
+            type="submit"
+            data-testid="searchBookFormSubmitButton"
+          >
+            Cari
+          </button>
+        </form>
+      </section>
+
+      <div class="grid-list">
+        <section>
+          <h2 id="incTitle">Belum selesai dibaca</h2>
+          <div id="incompleteBookList" data-testid="incompleteBookList"></div>
+        </section>
+
+        <section>
+          <h2 id="comTitle">Selesai dibaca</h2>
+          <div id="completeBookList" data-testid="completeBookList"></div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
