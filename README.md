@@ -2,6 +2,9 @@
 
 Aplikasi pengelolaan daftar buku berbasis web yang dikembangkan sebagai proyek akhir kelas **"Belajar Membuat Front-End Web untuk Pemula"** di Dicoding Indonesia. Proyek ini telah diverifikasi dan mendapatkan penilaian **Bintang 5 (Sempurna)** ⭐.
 
+## 📸 Tampilan Aplikasi
+![Tampilan Light Mode](Bookshelf-App.png)
+
 ## 🔗 Tautan Proyek
 * **Live Demo**: [https://mahmuda1004.github.io/bookshelf-app-dicoding/](https://mahmuda1004.github.io/bookshelf-app/)
 * **Repositori**: [https://github.com/mahmuda1004/bookshelf-app-dicoding](https://github.com/mahmuda1004/bookshelf-app)
